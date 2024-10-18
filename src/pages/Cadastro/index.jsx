@@ -52,19 +52,8 @@ function Cadastro() {
             </div>
           </div>
           <button type="submit">Cadastrar</button>
-          <button 
-            type="button" 
-            style={{ 
-              backgroundColor: 'white', 
-              border: 'none', 
-              display: 'flex', 
-              justifyContent: 'center',
-              alignItems: 'center', 
-              padding: '10px', 
-              cursor: 'pointer',
-              color: 'black'
-            }}
-          >
+
+          <button type="button" class="buttongoogle">
             Continuar com o Google
             <img src={googleLogo} alt="Google Logo" style={{ width: '20px', marginLeft: '8px' }} />
           </button>
