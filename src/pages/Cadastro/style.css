@@ -120,3 +120,7 @@ button:hover {
   cursor: pointer;
   color: black;
 }
+
+.buttongoogle:hover {
+  background-color: #a0a0a0;
+}

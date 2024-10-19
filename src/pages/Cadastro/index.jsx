@@ -54,7 +54,7 @@ function Cadastro() {
           <button type="submit">Cadastrar</button>
 
           <button type="button" class="buttongoogle">
-            Continuar com o Google
+            Cadastrar com o Google
             <img src={googleLogo} alt="Google Logo" style={{ width: '20px', marginLeft: '8px' }} />
           </button>
 
