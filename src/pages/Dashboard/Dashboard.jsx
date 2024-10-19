@@ -54,7 +54,7 @@ const Dashboard = () => {
         <div className="dashboard">
             <Sidebar isMinimized={isSidebarMinimized} toggleSidebar={toggleSidebar} />
             <div className={`dashboard-content ${isSidebarMinimized ? 'minimized' : ''}`}>
-                <h1>Bem-vindo ao Painel</h1>
+                <h1>Bem-vindo ao Painel do Aluno</h1>
 
                 <h2>Cursos Disponíveis</h2>
                 <div className="cards-container">
@@ -76,22 +76,25 @@ const Dashboard = () => {
                     <DashboardCard title="Estatísticas" description="Veja as estatísticas de seus cursos." />
                     <DashboardCard title="Configurações" description="Ajuste suas preferências." />
                 </div>
-
-                {/* Modal Flutuante */}
-                {isModalOpen && (
-                    <div className="modal">
-                        <div className="modal-content">
-                            <span className="modal-close" onClick={closeModal}>&times;</span>
-                            <h3>{selectedCourse.title}</h3>
-                            <p><strong>Duração:</strong> {selectedCourse.duration}</p>
-                            <p><strong>Professor:</strong> {selectedCourse.professor}</p>
-                            <p><strong>O que você aprenderá:</strong> {selectedCourse.content}</p>
-                            <p><strong>Certificado:</strong> {selectedCourse.certificate}</p>
-                            <button onClick={closeModal}>Fechar</button>
-                        </div>
-                    </div>
-                )}
             </div>
+
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="modal-close" onClick={closeModal}>&times;</span>
+                        {selectedCourse && (
+                            <>
+                                <h3>{selectedCourse.title}</h3>
+                                <p><strong>Duração:</strong> {selectedCourse.duration}</p>
+                                <p><strong>Professor:</strong> {selectedCourse.professor}</p>
+                                <p><strong>O que você aprenderá:</strong> {selectedCourse.content}</p>
+                                <p><strong>Certificado:</strong> {selectedCourse.certificate}</p>
+                            </>
+                        )}
+                        <button onClick={closeModal}>Fechar</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
