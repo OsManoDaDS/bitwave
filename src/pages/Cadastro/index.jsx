@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './style.css';
-import googleLogo from '../Cadastro/googleLogo.png';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
 
 function Cadastro() {
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -52,6 +54,17 @@ function Cadastro() {
             </div>
           </div>
           <button type="submit">Cadastrar</button>
+        
+        
+          <GoogleLogin
+          onSuccess={credentialResponse => {
+            const decoded = jwtDecode(credentialResponse?.credential);
+            console.log(decoded);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+            }}
+          />
 
         </form>
       </div>
