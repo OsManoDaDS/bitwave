@@ -53,12 +53,6 @@ function Cadastro() {
           </div>
           <button type="submit">Cadastrar</button>
 
-          <button type="button" class="buttongoogle">
-            Cadastrar com o Google
-            <img src={googleLogo} alt="Google Logo" style={{ width: '20px', marginLeft: '8px' }} />
-          </button>
-
-
         </form>
       </div>
       <footer className="footer">

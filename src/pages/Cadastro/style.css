@@ -109,18 +109,3 @@ button:hover {
 .terms a:hover {
   text-decoration: underline;
 }
-
-.buttongoogle {
-  background: white; 
-  border: none; 
-  display: flex; 
-  justify-content: center;
-  align-items: center; 
-  padding: 10px; 
-  cursor: pointer;
-  color: black;
-}
-
-.buttongoogle:hover {
-  background-color: #a0a0a0;
-}

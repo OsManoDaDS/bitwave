@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import './style.css';
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
+
   return (
     <div className="app-container">
       <nav className="navbar">
@@ -11,13 +14,23 @@ function Login() {
       <div className="container">
         <form>
           <h1>Login</h1>
-          <input name="Email" type="email" placeholder="Email" />
-          <input name="Senha" type="password" placeholder="Senha" />
+          <input name="Email" type="email" placeholder="Email" required />
+          <input name="Senha" type="password" placeholder="Senha" required />
           <button type="button">Logar</button>
         </form>
 
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            const decoded = jwtDecode(credentialResponse?.credential);
+            console.log(decoded);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+
         <div className="signup-link">
-          <p>Não tem uma conta? <Link to='/Cadastro'>Registre-se</Link></p>
+          <p>Não tem uma conta? <Link to='/cadastro'>Registre-se</Link></p>
         </div>
       </div>
       <footer className="footer">
