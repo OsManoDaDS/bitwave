@@ -1,3 +1,4 @@
+/* Geral */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -6,7 +7,14 @@ body {
     color: #f4f4f9;
 }
 
-/* Sidebar minimizada */
+h1 {
+    margin-bottom: 20px; /* Espaço entre o título principal e o conteúdo */
+}
+
+h2 {
+    margin-bottom: 20px; /* Espaço entre o título e os elementos abaixo */
+}
+/* Sidebar */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -26,7 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px; /* Adicionado para espaçamento */
+    margin-bottom: 20px;
 }
 
 .sidebar-header h2 {
@@ -43,7 +51,7 @@ body {
     border: none;
     color: #bfc7ff;
     cursor: pointer;
-    margin-bottom: 20px; /* Espaçamento */
+    margin-bottom: 20px;
 }
 
 .sidebar ul {
@@ -52,7 +60,7 @@ body {
 }
 
 .sidebar ul li {
-    margin: 20px 0; /* Aumentado para espaçamento */
+    margin: 20px 0;
 }
 
 .sidebar ul li a {
@@ -64,34 +72,39 @@ body {
     color: #007bff;
 }
 
+/* Dashboard */
 .dashboard {
     display: flex;
     background-color: #1b1b1b;
-    height: 100vh; /* Fazendo o dashboard preencher toda a altura da tela */
+    height: 100vh;
 }
 
 .dashboard-content {
-    margin-left: 250px; /* Largura da sidebar */
+    margin-left: 250px;
     padding: 40px;
-    width: calc(100% - 250px); /* Largura total menos a sidebar */
-    transition: margin-left 0.3s ease, width 0.3s ease; /* Adicionando transição */
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
 .sidebar.minimized + .dashboard-content {
-    margin-left: 80px; /* Largura quando a sidebar está minimizada */
-    width: calc(100% - 80px); /* Ajustando a largura */
+    margin-left: 80px;
+    width: calc(100% - 80px);
 }
 
 .minimized .dashboard-content {
-    margin-left: 0; /* Se a sidebar estiver minimizada, remove a margem */
-    width: 100%; /* Preenche toda a largura disponível */
+    margin-left: 0;
+    width: 100%;
 }
 
 .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
+    gap: 30px; /* Espaçamento entre os cards */
+    margin-top: 30px; /* Espaçamento acima dos cards */
+}
+
+.dashboard-content h2 + .cards-container {
+    margin-bottom: 50px; /* Espaçamento entre os cards e o título da próxima seção */
 }
 
 .dashboard-card {
@@ -117,6 +130,7 @@ body {
     color: #bfc7ff;
 }
 
+/* Seção de Estatísticas */
 .statistics-section {
     margin-top: 40px;
 }
@@ -138,6 +152,7 @@ body {
     height: 400px;
 }
 
+/* Modal */
 .modal {
     position: fixed;
     top: 0;
@@ -152,13 +167,14 @@ body {
 }
 
 .modal-content {
-    background-color: #fff;
+    background: linear-gradient(180deg, #2c2c54 0%, #232347 50%, #1b1b3a 100%);
     padding: 20px;
     border-radius: 10px;
-    color: black;
+    color: rgb(255, 255, 255);
+    text-align: justify;
     min-width: 300px;
     max-width: 500px;
-    position: relative; /* Para permitir o posicionamento do botão de fechar */
+    position: relative;
 }
 
 .modal-close {
@@ -167,4 +183,35 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.modal-content .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
 }
