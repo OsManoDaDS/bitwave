@@ -7,21 +7,7 @@ import api from '../../services/api.js';
 
 function Cadastro() {
 
-  let users = []
-
-  async function getUsers() {
-    users = await api.get('/users')
-  }
-
-  useEffect(() => {
-    first
-
-    return () => {
-      second
-    }
-
-  }, [third])
-
+  
   const [acceptTerms, setAcceptTerms] = useState(false);
 
   const handleCheckboxChange = (e) => {
@@ -72,6 +58,7 @@ function Cadastro() {
           </div>
           <button type="submit">Cadastrar</button>
 
+          <p></p>
 
           <GoogleLogin
             onSuccess={credentialResponse => {
