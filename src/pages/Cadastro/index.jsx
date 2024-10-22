@@ -7,7 +7,21 @@ import api from '../../services/api.js';
 
 function Cadastro() {
 
-  
+  let users = []
+
+  async function getUsers() {
+    users = await api.get('/users')
+  }
+
+  useEffect(() => {
+    first
+
+    return () => {
+      second
+    }
+
+  }, [third])
+
   const [acceptTerms, setAcceptTerms] = useState(false);
 
   const handleCheckboxChange = (e) => {
