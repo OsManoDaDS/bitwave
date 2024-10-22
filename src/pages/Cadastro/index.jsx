@@ -1,10 +1,27 @@
+import { useEffect } from 'react';
 import React, { useState } from 'react';
 import './style.css';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-
+import api from '../../services/api.js';
 
 function Cadastro() {
+
+  let users = []
+
+  async function getUsers() {
+    users = await api.get('/users')
+  }
+
+  useEffect(() => {
+    first
+
+    return () => {
+      second
+    }
+
+  }, [third])
+
   const [acceptTerms, setAcceptTerms] = useState(false);
 
   const handleCheckboxChange = (e) => {
@@ -54,15 +71,15 @@ function Cadastro() {
             </div>
           </div>
           <button type="submit">Cadastrar</button>
-        
-        
+
+
           <GoogleLogin
-          onSuccess={credentialResponse => {
-            const decoded = jwtDecode(credentialResponse?.credential);
-            console.log(decoded);
-          }}
-          onError={() => {
-            console.log('Login Failed');
+            onSuccess={credentialResponse => {
+              const decoded = jwtDecode(credentialResponse?.credential);
+              console.log(decoded);
+            }}
+            onError={() => {
+              console.log('Login Failed');
             }}
           />
 
