@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
 
-    baseURL: 'http://localhost:3030'
+    baseURL: 'https://api-crud-utv0.onrender.com/'
 
 })
 
