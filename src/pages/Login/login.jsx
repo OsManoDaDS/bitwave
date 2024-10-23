@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import './style.css';
 import { jwtDecode } from "jwt-decode";
+import api from '../../services/api.js';
 
 function Login() {
 
