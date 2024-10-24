@@ -41,7 +41,9 @@ function Cadastro() {
   return (
     <div className="app-container">
       <nav className="navbar">
+      <div className='row mt-3'>
         <h1>BitWave</h1>
+      </div>
       </nav>
       <div className="container">
         <form onSubmit={handleSubmit}>
