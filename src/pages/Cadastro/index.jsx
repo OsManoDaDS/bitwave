@@ -13,14 +13,14 @@ function Cadastro() {
     users = await api.get('/users')
   }
 
-  useEffect(() => {
-    first
+  // useEffect(() => {
+  //   first
 
-    return () => {
-      second
-    }
+  //   return () => {
+  //     second
+  //   }
 
-  }, [third])
+  // }, [third])
 
   const [acceptTerms, setAcceptTerms] = useState(false);
 
