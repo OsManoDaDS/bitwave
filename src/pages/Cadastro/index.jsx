@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import React, { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import './style.css';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
@@ -7,10 +7,25 @@ import api from '../../services/api.js';
 
 function Cadastro() {
 
-  let users = []
+  const [users, setUsers] = useState([])
+
+  const inputName = useRef()
+  const inputEmail = useRef()
+  const inputSenha = useRef()
 
   async function getUsers() {
-    users = await api.get('/users')
+    const usersFromApi = await api.get('/users')
+
+    setUsers(usersFromApi.data)
+    console.log(users)
+  }
+
+  async function createUsers() {
+    await api.post('/users', {
+      name: inputName.current.value,
+      email: inputEmail.current.value,
+      senha: inputSenha.current.value
+    })
   }
 
   // useEffect(() => {
@@ -41,18 +56,18 @@ function Cadastro() {
   return (
     <div className="app-container">
       <nav className="navbar">
-      <div className='row mt-3'>
-        <h1>BitWave</h1>
-      </div>
+        <div className='row mt-3'>
+          <h1>BitWave</h1>
+        </div>
       </nav>
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div className='row mt-3'>
             <h1>Cadastro de Usuário</h1>
           </div>
-          <input name="Nome" type="text" placeholder="Nome" required />
-          <input name="Email" type="email" placeholder="Email" required />
-          <input name="Senha" type="password" placeholder="Senha" required />
+          <input name="Nome" type="text" placeholder="Nome" ref={inputName} required />
+          <input name="Email" type="email" placeholder="Email" ref={inputEmail} required />
+          <input name="Senha" type="password" placeholder="Senha" ref={inputSenha} required />
 
           <div className="terms">
             <div className='row mt-3'>
@@ -72,7 +87,7 @@ function Cadastro() {
               </div>
             </div>
           </div>
-          <button type="submit">Cadastrar</button>
+          <button type="button" onClick={createUsers}>Cadastrar</button>
 
           <p></p>
 
