@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
 
+
 const CourseCard = ({ title, description, image }) => {
     return (
         <div className="course-card">
