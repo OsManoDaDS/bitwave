@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import React from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import api from '../../services/api.js';
@@ -8,6 +9,7 @@ import api from '../../services/api.js';
 function Cadastro() {
 
   const [users, setUsers] = useState([])
+  const navigate = useNavigate();
 
   const inputName = useRef()
   const inputEmail = useRef()
@@ -26,6 +28,7 @@ function Cadastro() {
       email: inputEmail.current.value,
       senha: inputSenha.current.value
     })
+    navigate('../Login/login');
   }
 
   // useEffect(() => {

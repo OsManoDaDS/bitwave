@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import React from 'react';
 import './style.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import api from '../../services/api.js';
@@ -11,7 +11,6 @@ function Login() {
   const inputEmail = useRef();
   const inputSenha = useRef();
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   async function fazerlogin() {
     try {
@@ -24,10 +23,11 @@ function Login() {
       // Armazena o token no localStorage
       localStorage.setItem('token', token);
 
-      // Redireciona o usuário após login bem-sucedido
-      navigate('/dashboard');
+      // Atualiza o estado de autenticação
+      setIsAuthenticated(true);
+
     } catch (error) {
-      setErrorMessage('Login falhou. Verifique suas credenciais.');
+      setErrorMessage('Login falhou. Verifique suas credenciais.'); // Define a mensagem de erro
     }
   };
 
@@ -41,11 +41,12 @@ function Login() {
           <h1>Login</h1>
           <input name="Email" type="email" placeholder="Email" required />
           <input name="Senha" type="password" placeholder="Senha" required />
+
           <button type="button" onClick={fazerlogin}>Logar</button>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <p></p>
-          
+
           <GoogleLogin
             onSuccess={credentialResponse => {
               const decoded = jwtDecode(credentialResponse?.credential);
@@ -55,6 +56,7 @@ function Login() {
               console.log('Login Failed');
             }}
           />
+
           <div className="signup-link">
             <p>Não tem uma conta? <Link to='/cadastro'>Registre-se</Link></p>
           </div>
