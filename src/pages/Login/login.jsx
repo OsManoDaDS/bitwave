@@ -1,11 +1,35 @@
+import { useState, useRef } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
 import './style.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import api from '../../services/api.js';
 
 function Login() {
+
+  const inputEmail = useRef();
+  const inputSenha = useRef();
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  async function fazerlogin() {
+    try {
+      const response = await api.post('/login', {
+        email: inputEmail.current.value,
+        senha: inputSenha.current.value,
+      });
+      const { token } = response.data;
+
+      // Armazena o token no localStorage
+      localStorage.setItem('token', token);
+
+      // Redireciona o usuário após login bem-sucedido
+      navigate('/dashboard');
+    } catch (error) {
+      setErrorMessage('Login falhou. Verifique suas credenciais.');
+    }
+  };
 
   return (
     <div className="app-container">
@@ -17,7 +41,8 @@ function Login() {
           <h1>Login</h1>
           <input name="Email" type="email" placeholder="Email" required />
           <input name="Senha" type="password" placeholder="Senha" required />
-          <button type="button">Logar</button>
+          <button type="button" onClick={fazerlogin}>Logar</button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <p></p>
           
