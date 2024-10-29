@@ -8,9 +8,9 @@ import api from '../../services/api.js';
 
 function Login() {
 
-  const inputEmail = useRef();
-  const inputSenha = useRef();
-  const [errorMessage, setErrorMessage] = useState('');
+  const inputEmail = useRef()
+  const inputSenha = useRef()
+  const [errorMessage, setErrorMessage] = useState('')
 
   async function fazerlogin() {
     try {
@@ -22,9 +22,6 @@ function Login() {
 
       // Armazena o token no localStorage
       localStorage.setItem('token', token);
-
-      // Atualiza o estado de autenticação
-      setIsAuthenticated(true);
 
     } catch (error) {
       setErrorMessage('Login falhou. Verifique suas credenciais.'); // Define a mensagem de erro
@@ -42,7 +39,7 @@ function Login() {
           <input name="Email" type="email" placeholder="Email" required />
           <input name="Senha" type="password" placeholder="Senha" required />
 
-          <button type="button" onClick={fazerlogin}>Logar</button>
+          <button type="submit" onClick={fazerlogin}>Logar</button>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
 
           <p></p>
