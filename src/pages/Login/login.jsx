@@ -31,6 +31,29 @@ function Login() {
     }
   };
 
+  // POSSÍVEL CÓDIGO
+  // const fazerlogin = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!email || !password) {
+  //     setMessage("Email e senha são obrigatórios.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await axios.post('/login', { email, password });
+  //     const { token, msg } = response.data;
+
+  //     setMessage(msg);
+      
+  //     if (token) {
+  //       localStorage.setItem('token', token);
+  //     }
+  //   } catch (error) {
+  //     setMessage(error.response?.data?.msg || "Erro ao realizar login.");
+  //   }
+  // };
+
   return (
     <div className="app-container">
       <nav className="navbar">
