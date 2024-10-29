@@ -52,7 +52,7 @@ function Home() {
                     </div>
                 </section>
                 <section className="courses-section" id="courses">
-                    <h2>Nossos Cursos</h2>
+                    <h2>Nossos Cursos em Destaque</h2>
                     <div className="courses">
                         <CourseCard
                             title="Desenvolvimento de Sistemas: Do Planejamento à Implementação"
