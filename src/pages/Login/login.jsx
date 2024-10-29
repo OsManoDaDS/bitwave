@@ -19,18 +19,18 @@ function Login() {
     try {
       const response = await api.post('/login', {
         email: inputEmail.current.value,
-        senha: inputSenha.current.value,
+        password: inputSenha.current.value, // Corrigi o nome para 'password'
       });
-      const { token } = response.data;
 
+      const { token } = response.data;
       localStorage.setItem('token', token);
       setErrorMessage('');
 
-      window.location.href = '/Dashboard';
+      window.location.href = '/Dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
-      setErrorMessage('Login falhou. Verifique suas credenciais.');
+      setErrorMessage(error.response?.data?.msg || 'Login falhou. Verifique suas credenciais.');
     }
-  };
+  }
 
   // POSSÍVEL CÓDIGO
   // const fazerlogin = async (e) => {
@@ -63,8 +63,8 @@ function Login() {
       <div className="container">
         <form>
           <h1>Login</h1>
-          <input name="Email" type="email" placeholder="Email" required />
-          <input name="Senha" type="password" placeholder="Senha" required />
+          <input name="Email" type="email" placeholder="Email" ref={inputEmail} required />
+          <input name="Senha" type="password" placeholder="Senha" ref={inputSenha} required />
 
           <button type="submit" onClick={fazerlogin}>Logar</button>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
