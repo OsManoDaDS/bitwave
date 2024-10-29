@@ -3,7 +3,7 @@ import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import api from '../../services/api.js';
 
 function Login() {
@@ -12,7 +12,9 @@ function Login() {
   const inputSenha = useRef()
   const [errorMessage, setErrorMessage] = useState('')
 
-  async function fazerlogin() {
+  async function fazerlogin(event) {
+    event.preventDefault();
+
     try {
       const response = await api.post('/login', {
         email: inputEmail.current.value,
@@ -20,11 +22,12 @@ function Login() {
       });
       const { token } = response.data;
 
-      // Armazena o token no localStorage
       localStorage.setItem('token', token);
+      setErrorMessage('');
 
+      window.location.href = '/Dashboard';
     } catch (error) {
-      setErrorMessage('Login falhou. Verifique suas credenciais.'); // Define a mensagem de erro
+      setErrorMessage('Login falhou. Verifique suas credenciais.');
     }
   };
 
