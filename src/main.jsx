@@ -6,6 +6,7 @@ import './index.css'
 import Cadastro from './pages/Cadastro'
 import Home from './pages/home/home'
 import App from './app'
+import LandingPage from "./pages/lading/LandingPage";
 
 createRoot(document.getElementById('root')).render(
 
