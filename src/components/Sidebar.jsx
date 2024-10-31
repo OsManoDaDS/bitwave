@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Adicione a importação
 import '../pages/Dashboard/styles.css';
 
 const Sidebar = ({ isMinimized, toggleSidebar }) => {
+    const navigate = useNavigate(); // Use o hook useNavigate
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        toggleSidebar(); // Fecha a sidebar após a navegação
+    };
+
     return (
         <div className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
             <div className="sidebar-header" onClick={toggleSidebar}>
@@ -11,11 +19,21 @@ const Sidebar = ({ isMinimized, toggleSidebar }) => {
                 <span className="material-icons">{isMinimized ? 'arrow_forward' : 'arrow_back'}</span>
             </button>
             <ul>
-                <li><a href="#overview">{isMinimized ? <span className="material-icons">visibility</span> : 'Visão Geral'}</a></li>
-                <li><a href="#courses">{isMinimized ? <span className="material-icons">menu_book</span> : 'Meus Cursos'}</a></li>
-                <li><a href="#settings">{isMinimized ? <span className="material-icons">settings</span> : 'Configurações'}</a></li>
-                <li><a href="#profile">{isMinimized ? <span className="material-icons">person</span> : 'Perfil'}</a></li>
-                <li><a href="#logout">{isMinimized ? <span className="material-icons">exit_to_app</span> : 'Logout'}</a></li>
+                <li onClick={() => handleNavigation('/dashboard')} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">visibility</span> : 'Visão Geral'}
+                </li>
+                <li onClick={() => handleNavigation('/meus-cursos')} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">menu_book</span> : 'Meus Cursos'}
+                </li>
+                <li onClick={() => handleNavigation('/configuracoes')} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">settings</span> : 'Configurações'}
+                </li>
+                <li onClick={() => handleNavigation('/perfil')} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">person</span> : 'Perfil'}
+                </li>
+                <li onClick={() => handleNavigation('/logout')} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">exit_to_app</span> : 'Logout'}
+                </li>
             </ul>
         </div>
     );
