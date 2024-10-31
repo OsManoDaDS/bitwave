@@ -14,7 +14,6 @@ h1 {
 h2 {
     margin-bottom: 20px; /* Espaço entre o título e os elementos abaixo */
 }
-/* Sidebar */
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -37,9 +36,11 @@ h2 {
     margin-bottom: 20px;
 }
 
-.sidebar-header h2 {
-    margin: 0;
-    transition: opacity 0.3s ease;
+.sidebar-item {
+    padding: 10px; /* Adiciona um espaço ao redor do item */
+    cursor: pointer; /* Indica que o item é clicável */
+    color: #bfc7ff; /* Cor do texto */
+    transition: background-color 0.3s ease; /* Transição suave para mudança de cor */
 }
 
 .sidebar.minimized .sidebar-header h2 {

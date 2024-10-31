@@ -22,9 +22,9 @@ function Login() {
         password: inputSenha.current.value, // Corrigi o nome para 'password'
       });
 
-      const { token } = response.data;
+      const { token, userId } = response.data; // Certifique-se de que a API retorne o userId
       localStorage.setItem('token', token);
-      setErrorMessage('');
+      localStorage.setItem('userId', userId); // Armazene o userId
 
       window.location.href = '/Dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
@@ -46,7 +46,7 @@ function Login() {
   //     const { token, msg } = response.data;
 
   //     setMessage(msg);
-      
+
   //     if (token) {
   //       localStorage.setItem('token', token);
   //     }
