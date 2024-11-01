@@ -8,6 +8,7 @@ const Dashboard = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [notification, setNotification] = useState('');
+    const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
 
     const toggleSidebar = () => {
         setIsSidebarMinimized(!isSidebarMinimized);
@@ -24,10 +25,14 @@ const Dashboard = () => {
     };
 
     const handleEnrollment = () => {
-        // Simula a adição do curso a "Meus cursos"
+        // Adiciona o curso ao estado "Meus cursos" se ainda não estiver nele
+        if (!myCourses.some(course => course.title === selectedCourse.title)) {
+            setMyCourses([...myCourses, selectedCourse]);
+        }
+        
         closeModal(); // Fecha o modal
         setNotification('Curso adicionado a "Meus cursos". Você já pode acessá-lo!');
-        
+
         // Remove a notificação após alguns segundos
         setTimeout(() => {
             setNotification('');
@@ -55,7 +60,6 @@ const Dashboard = () => {
         }
     ];
 
-
     return (
         <div className="dashboard">
             <Sidebar isMinimized={isSidebarMinimized} toggleSidebar={toggleSidebar} />
@@ -70,8 +74,25 @@ const Dashboard = () => {
                             title={course.title}
                             description="Clique aqui para saber mais"
                             onClick={() => openModal(course)}
+                            showRating={false} // Não mostrar avaliação nos cursos em destaque
                         />
                     ))}
+                </div>
+
+                <h2>Meus Cursos</h2>
+                <div className="cards-container">
+                    {myCourses.length > 0 ? (
+                        myCourses.map((course, index) => (
+                            <DashboardCard
+                                key={index}
+                                title={course.title}
+                                description="Curso disponível para acesso"
+                                showRating={true} // Mostrar avaliação nos "Meus Cursos"
+                            />
+                        ))
+                    ) : (
+                        <p>Você ainda não está inscrito em nenhum curso.</p>
+                    )}
                 </div>
 
                 <h2>Outros Recursos</h2>
