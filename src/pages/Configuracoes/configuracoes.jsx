@@ -7,7 +7,7 @@ const Configuracoes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const userId = localStorage.getItem('userId');
-  const token = localStorage.getItem('token'); // Adicionando o token
+  const token = localStorage.getItem('token'); 
   const apiUrl = `https://api-crud-1-sqcl.onrender.com/users/${userId}`;
 
   useEffect(() => {
@@ -17,30 +17,31 @@ const Configuracoes = () => {
         setLoading(false);
         return;
       }
-
+  
       try {
         const response = await fetch(apiUrl, {
           headers: {
-            Authorization: `Bearer ${token}`, // Inclua o token na requisição
+            Authorization: `Bearer ${token}`,
           },
         });
-
+  
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          const errorMsg = `Erro na resposta da rede: ${response.status} - ${response.statusText}`;
+          throw new Error(errorMsg);
         }
-
+  
         const data = await response.json();
-        setUser(data); // Atualiza o estado com os dados do usuário
+        setUser(data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
-        setError('Erro ao carregar os dados do usuário.');
+        console.error('Erro ao buscar dados do usuário:', error.message);
+        setError(`Erro ao carregar os dados do usuário: ${error.message}`);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchUserData();
-  }, [apiUrl, userId, token]); // Adicionando token às dependências
+  }, [apiUrl, userId, token]);  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -63,15 +64,7 @@ const Configuracoes = () => {
     setUser({ ...user, foto: URL.createObjectURL(file) });
   };
 
-  useEffect(() => {
-    // Alerta com os dados do localStorage
-    const userData = localStorage.getItem('userId') ? `UserId: ${localStorage.getItem('userId')}` : 'Nenhum usuário encontrado.';
-    const tokenData = localStorage.getItem('token') ? `Token: ${localStorage.getItem('token')}` : 'Nenhum token encontrado.';
-    
-    alert(`Dados do LocalStorage:\n${userData}\n${tokenData}`);
-  }, [loading]);
-
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Carregando...</div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -86,7 +79,7 @@ const Configuracoes = () => {
           <input
             type="text"
             name="name"
-            value={user.name || ''} // Garantir que não seja undefined
+            value={user?.name || ''} // Garantir que não seja undefined
             onChange={handleInputChange}
           />
         </label>
@@ -94,7 +87,7 @@ const Configuracoes = () => {
           <input
             type="email"
             name="email"
-            value={user.email || ''} // Garantir que não seja undefined
+            value={user?.email || ''} // Garantir que não seja undefined
             onChange={handleInputChange}
           />
         </label>
@@ -103,7 +96,7 @@ const Configuracoes = () => {
       <section>
         <h2>Foto de Perfil</h2>
         <input type="file" onChange={handlePhotoUpload} />
-        {user.foto && <img src={user.foto} alt="Foto de perfil" />}
+        {user?.foto && <img src={user.foto} alt="Foto de perfil" />}
       </section>
 
       <section>
@@ -112,7 +105,7 @@ const Configuracoes = () => {
           <input
             type="checkbox"
             name="atualizacoes"
-            checked={user.notificacoes?.atualizacoes || false}
+            checked={user?.notificacoes?.atualizacoes || false}
             onChange={handleNotificationChange}
           />
           Receber atualizações de cursos
@@ -121,7 +114,7 @@ const Configuracoes = () => {
           <input
             type="checkbox"
             name="promocoes"
-            checked={user.notificacoes?.promocoes || false}
+            checked={user?.notificacoes?.promocoes || false}
             onChange={handleNotificationChange}
           />
           Receber promoções e ofertas
@@ -131,13 +124,13 @@ const Configuracoes = () => {
       <section>
         <h2>Idioma e Moeda</h2>
         <label>Idioma:
-          <select name="idioma" value={user.idioma || "Português"} onChange={handleInputChange}>
+          <select name="idioma" value={user?.idioma || "Português"} onChange={handleInputChange}>
             <option value="Português">Português</option>
             <option value="Inglês">Inglês</option>
           </select>
         </label>
         <label>Moeda:
-          <select name="moeda" value={user.moeda || "BRL"} onChange={handleInputChange}>
+          <select name="moeda" value={user?.moeda || "BRL"} onChange={handleInputChange}>
             <option value="BRL">BRL - Real</option>
             <option value="USD">USD - Dólar</option>
           </select>
