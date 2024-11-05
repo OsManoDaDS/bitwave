@@ -74,12 +74,26 @@ function Login() {
           <GoogleLogin
             onSuccess={credentialResponse => {
               const decoded = jwtDecode(credentialResponse?.credential);
-              console.log(decoded);
+              const { email, name } = decoded; // Extrai o email e o nome do token
+
+              // Envia os dados ao backend para login ou cadastro
+              api.post('/login/google', { email, name })
+                .then(response => {
+                  const { token, userId } = response.data;
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('userId', userId);
+                  window.location.href = '/Dashboard'; // Redireciona após login
+                })
+                .catch(error => {
+                  setErrorMessage(error.response?.data?.message || 'Erro ao fazer login com Google');
+                });
             }}
             onError={() => {
-              console.log('Login Failed');
+              console.log('Login com Google falhou');
+              setErrorMessage('Erro ao fazer login com Google');
             }}
           />
+
 
           <div className="signup-link">
             <p>Não tem uma conta? <Link to='/cadastro'>Registre-se</Link></p>

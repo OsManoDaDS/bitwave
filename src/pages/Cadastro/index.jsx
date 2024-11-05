@@ -95,10 +95,24 @@ function Cadastro() {
           <GoogleLogin
             onSuccess={credentialResponse => {
               const decoded = jwtDecode(credentialResponse?.credential);
-              console.log(decoded);
+              const { email, name } = decoded; // Extraindo email e nome
+
+              // Agora, envia essas informações para o backend
+              api.post('/users', {
+                email: email,
+                name: name,
+                password: '' // Pode deixar vazio se não for obrigatório
+              })
+                .then(response => {
+                  console.log('Usuário cadastrado com Google:', response.data);
+                  window.location.href = "./Login";
+                })
+                .catch(error => {
+                  console.error('Erro ao cadastrar usuário com Google:', error);
+                });
             }}
             onError={() => {
-              console.log('Login Failed');
+              console.log('Login com Google falhou');
             }}
           />
 
