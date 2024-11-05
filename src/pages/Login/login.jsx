@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,30 @@ function Login() {
   const inputEmail = useRef()
   const inputSenha = useRef()
   const [errorMessage, setErrorMessage] = useState('')
+  const [users, setUsers] = useState([]);
+  const [userEmail, setUserEmail] = useState([]);
+  //let userId;
+  
+
+  async function getUsers() {
+    const usersFromApi = await api.get("/users")
+
+    setUsers(usersFromApi.data)
+    //console.log(usersFromApi.data)
+    console.log(users)
+  }
+
+  async function getUserEmail(email) {
+    const userEmailFromApi = await api.get(`/users?email=${email}`)
+
+    setUserEmail(userEmailFromApi.data)
+    console.log(userEmailFromApi.data)
+    console.log(userEmail)
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   async function fazerlogin(event) {
     event.preventDefault();
@@ -22,11 +46,29 @@ function Login() {
         password: inputSenha.current.value, // Corrigi o nome para 'password'
       });
 
-      const { token, userId } = response.data; // Certifique-se de que a API retorne o userId
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', userId); // Armazene o userId
 
-      window.location.href = '/Dashboard'; // Redireciona para o dashboard após login bem-sucedido
+
+      //const { token, userId } = response.data; // Certifique-se de que a API retorne o userId
+      //localStorage.setItem('token', token);
+      //const { userId } = response.data
+      //localStorage.setItem('userId', users.id)
+      //userId = users.id;
+      //console.log(userId);
+      
+      // Armazene o userId
+      
+      getUserEmail(inputEmail.current.value);
+      userEmail.map((user) => (
+      //  userId = (user.id) 
+        localStorage.setItem("userId", user.id)
+      ))
+      //console.log(userId)
+      console.log(localStorage.getItem("userId"))
+      //userId = userEmail.id;
+      //console.log(userEmail);
+      //alert(userId);
+
+      //window.location.href = '/Dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
       setErrorMessage(error.response?.data?.msg || 'Login falhou. Verifique suas credenciais.');
     }

@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar.jsx';
 import DashboardCard from '../../components/DashboardCard.jsx';
 import './styles.css';
 import api from '../../services/api.js';
+import userId from '../Login/login.jsx'
 
 
 const Dashboard = () => {
@@ -12,6 +13,8 @@ const Dashboard = () => {
     const [notification, setNotification] = useState('');
     const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
     const [matriCourses, setMatriCourses] = useState([]);
+
+    console.log(userId);
 
     async function getCourses() {
         const coursesFromApi = await api.get("/courses")

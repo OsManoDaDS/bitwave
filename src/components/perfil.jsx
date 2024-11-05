@@ -11,7 +11,7 @@ const Perfil = () => {
         const fetchUserData = async () => {
             try {
                 const token = localStorage.getItem('token'); // Assumindo que o token está armazenado
-                const response = await axios.get('https://api-crud-1-sqcl.onrender.com/users/id_do_usuario', {
+                const response = await api.get(`/users/${localStorage.getItem("userId")}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setUser(response.data);
