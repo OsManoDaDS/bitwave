@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import Sidebar from '../../components/SideBar';
-import DashboardCard from '../../components/DashboardCard';
+import React, { useEffect, useState, useRef } from 'react';
+import Sidebar from '../../components/Sidebar.jsx';
+import DashboardCard from '../../components/DashboardCard.jsx';
 import './styles.css';
+import api from '../../services/api.js';
+
 
 const Dashboard = () => {
     const [isSidebarMinimized, setIsSidebarMinimized] = useState(false);
@@ -9,7 +11,28 @@ const Dashboard = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [notification, setNotification] = useState('');
     const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
+    const [matriCourses, setMatriCourses] = useState([]);
 
+    async function getCourses() {
+        const coursesFromApi = await api.get("/courses")
+    
+        setMyCourses(coursesFromApi.data)
+        console.log(myCourses)
+    }
+    
+    async function getMatriCourses() {
+        const matriCoursesFromApi = await api.get("/matriCourse")
+    
+        setMatriCourses(matriCoursesFromApi.data)
+        console.log(matriCourses)
+    }
+    
+    useEffect(() => {
+        getCourses()
+        getMatriCourses()
+    }, [])
+
+    
     const toggleSidebar = () => {
         setIsSidebarMinimized(!isSidebarMinimized);
     };
@@ -39,7 +62,7 @@ const Dashboard = () => {
         }, 3000);
     };
 
-    const courses = [
+    /*const courses = [
         {
             title: "Desenvolvimento de Sistemas",
             description: "Aprenda a projetar e implementar sistemas complexos, utilizando as melhores práticas de engenharia de software e tecnologias modernas.",
@@ -58,7 +81,7 @@ const Dashboard = () => {
             duration: "4 horas",
             professor: "Prof. Pedro Portales"
         }
-    ];
+    ];*/
 
     return (
         <div className="dashboard">
@@ -68,14 +91,15 @@ const Dashboard = () => {
 
                 <h2>Cursos em Destaque</h2>
                 <div className="cards-container">
-                    {courses.map((course, index) => (
+                    {myCourses.map((course, index) => (
                         <DashboardCard
                             key={index}
-                            title={course.title}
-                            description="Clique aqui para saber mais"
+                            title={course.name}
+                            description={course.description}
                             onClick={() => openModal(course)}
                             showRating={false} // Não mostrar avaliação nos cursos em destaque
                         />
+                        
                     ))}
                 </div>
 
@@ -85,8 +109,8 @@ const Dashboard = () => {
                         myCourses.map((course, index) => (
                             <DashboardCard
                                 key={index}
-                                title={course.title}
-                                description="Curso disponível para acesso"
+                                title={course.name}
+                                description={course.description}
                                 showRating={true} // Mostrar avaliação nos "Meus Cursos"
                             />
                         ))

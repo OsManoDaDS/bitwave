@@ -16,10 +16,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Login" element={<Login />} /> 
-                <Route path="/Cadastro" element={<Cadastro />} />
-                <Route path="/Dashboard" element={<Dashboard />} />
-                <Route path="/landing" element={<LandingPage />} /> {/* Adicione esta linha */}
+                <Route path="/login" element={<Login />} /> 
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/meus-cursos" element={<LandingPage />} /> {/* Adicione esta linha */}
                 <Route path="/configuracoes" element={<Configuracoes />} />
             </Routes>
         </BrowserRouter>

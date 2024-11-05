@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import api from '../../services/api.js';
-import axios from 'axios';
+
 
 function Login() {
 
