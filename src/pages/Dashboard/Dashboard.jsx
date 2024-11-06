@@ -17,25 +17,25 @@ const Dashboard = () => {
 
     async function getCourses() {
         const coursesFromApi = await api.get("/courses")
-    
+
         setCourses(coursesFromApi.data)
         console.log(coursesFromApi.data)
         console.log(courses)
     }
-    
+
     async function getMyCourses() {
         const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`)
-    
+
         setMyCourses(myCoursesFromApi.data)
         console.log(myCourses)
     }
-    
+
     useEffect(() => {
         getCourses()
         getMyCourses()
     }, [])
 
-    
+
     const toggleSidebar = () => {
         setIsSidebarMinimized(!isSidebarMinimized);
     };
@@ -50,19 +50,32 @@ const Dashboard = () => {
         setSelectedCourse(null);
     };
 
-    const handleEnrollment = () => {
+    async function handleEnrollment() {
         // Adiciona o curso ao estado "Meus cursos" se ainda não estiver nele
-        if (!myCourses.some(course => course.title === selectedCourse.title)) {
-            setMyCourses([...myCourses, selectedCourse]);
-        }
-        
-        closeModal(); // Fecha o modal
-        setNotification('Curso adicionado a "Meus cursos". Você já pode acessá-lo!');
+        try {
 
-        // Remove a notificação após alguns segundos
-        setTimeout(() => {
-            setNotification('');
-        }, 3000);
+            await api.post('/matriCourse', {
+                userId: `${localStorage.getItem("userId")}`,
+                courseId: selectedCourse.id, // Corrigi o nome para 'password'
+              });
+
+            if (!myCourses.some(course => course.name === selectedCourse.name)) {
+                setMyCourses([...myCourses, selectedCourse]);
+            }
+
+            closeModal(); // Fecha o modal
+            setNotification('Curso adicionado a "Meus Cursos". Você já pode acessá-lo!');
+            // Remove a notificação após alguns segundos
+            setTimeout(() => {
+                setNotification('');
+            }, 3000);
+
+        } catch (error) {
+            setNotification('Falha ao adicionar a "Meus Cursos"');
+            setTimeout(() => {
+                setNotification('');
+            }, 3000);
+        }
     };
 
     /*const courses = [
@@ -102,7 +115,7 @@ const Dashboard = () => {
                             onClick={() => openModal(course)}
                             showRating={false} // Não mostrar avaliação nos cursos em destaque
                         />
-                        
+
                     ))}
                 </div>
 

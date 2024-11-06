@@ -12,31 +12,32 @@ function Login() {
   const inputEmail = useRef()
   const inputSenha = useRef()
   const [errorMessage, setErrorMessage] = useState('')
-  const [users, setUsers] = useState([]);
+  //const [users, setUsers] = useState([]);
   const [userEmail, setUserEmail] = useState([]);
-  //let userId;
-  
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  //let userEmail;
 
-  async function getUsers() {
+
+  /*async function getUsers() {
     const usersFromApi = await api.get("/users")
 
     setUsers(usersFromApi.data)
     //console.log(usersFromApi.data)
     console.log(users)
-  }
+  }*/
 
   async function getUserEmail(email) {
     const userEmailFromApi = await api.get(`/users?email=${email}`)
 
     setUserEmail(userEmailFromApi.data)
+    //setUserEmail([...userEmail, userEmailFromApi.data]);
     console.log(userEmailFromApi.data)
     console.log(userEmail)
   }
 
-  useEffect(() => {
-    getUsers()
-    getUserEmail()
-  }, [])
+  /*useEffect(() => {
+    console.log(userEmail);
+  }, [userEmail])*/
 
   async function fazerlogin(event) {
     event.preventDefault();
@@ -55,12 +56,25 @@ function Login() {
       //localStorage.setItem('userId', users.id)
       //userId = users.id;
       //console.log(userId);
-      
+
       // Armazene o userId
+
       
       getUserEmail(inputEmail.current.value);
+      
+      console.log(inputEmail.current.value)
+      userEmail.length > 0 ? (
+        userEmail.map((user) => (
+          //  userId = (user.id) 
+          console.log(user.id)
+          //localStorage.setItem("userId", user.id)
+        ))
+      ) : (
+        console.log("Não rodou")
+      )
       userEmail.map((user) => (
-      //  userId = (user.id) 
+        //  userId = (user.id) 
+        //console.log(user.id)
         localStorage.setItem("userId", user.id)
       ))
       //console.log(userId)
@@ -68,6 +82,9 @@ function Login() {
       //userId = userEmail.id;
       //console.log(userEmail);
       //alert(userId);
+
+      //await sleep(5000)
+
 
       window.location.href = '/dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
