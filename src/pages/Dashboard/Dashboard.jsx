@@ -12,6 +12,8 @@ const Dashboard = () => {
     const [courses, setCourses] = useState([]);
     const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
     //const [matriCourses, setMatriCourses] = useState([]);
+    //let courses = []
+    //let myCourses = []
 
     console.log(localStorage.getItem("userId"));
 
@@ -19,8 +21,11 @@ const Dashboard = () => {
         const coursesFromApi = await api.get("/courses")
 
         setCourses(coursesFromApi.data)
+        //courses = coursesFromApi.data
         console.log(coursesFromApi.data)
         console.log(courses)
+
+        //createCourseCards()
     }
 
     async function getMyCourses() {
@@ -57,7 +62,7 @@ const Dashboard = () => {
             await api.post('/matriCourse', {
                 userId: `${localStorage.getItem("userId")}`,
                 courseId: selectedCourse.id, // Corrigi o nome para 'password'
-              });
+            });
 
             if (!myCourses.some(course => course.name === selectedCourse.name)) {
                 setMyCourses([...myCourses, selectedCourse]);
@@ -111,6 +116,7 @@ const Dashboard = () => {
                         <DashboardCard
                             key={index}
                             title={course.name}
+                            //title="{course.name}"
                             description="Clique para ver detalhes"
                             onClick={() => openModal(course)}
                             showRating={false} // Não mostrar avaliação nos cursos em destaque

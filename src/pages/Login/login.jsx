@@ -13,9 +13,9 @@ function Login() {
   const inputSenha = useRef()
   const [errorMessage, setErrorMessage] = useState('')
   //const [users, setUsers] = useState([]);
-  const [userEmail, setUserEmail] = useState([]);
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-  //let userEmail;
+  //const [userEmail, setUserEmail] = useState([]);
+  //const sleep = ms => new Promise(r => setTimeout(r, ms));
+  let userEmail = [];
 
 
   /*async function getUsers() {
@@ -29,10 +29,31 @@ function Login() {
   async function getUserEmail(email) {
     const userEmailFromApi = await api.get(`/users?email=${email}`)
 
-    setUserEmail(userEmailFromApi.data)
+    //setUserEmail(userEmailFromApi.data)
     //setUserEmail([...userEmail, userEmailFromApi.data]);
+    userEmail = userEmailFromApi.data;
     console.log(userEmailFromApi.data)
     console.log(userEmail)
+    try {
+      //userEmail.length > 0 ? (
+        userEmail.map((user) => (
+          //  userId = (user.id) 
+          console.log(user.id),
+          localStorage.setItem("userId", user.id),
+          console.log(localStorage.getItem("userId"))
+        ))
+      //) : (
+      //  console.log("Não rodou")
+      //)
+      toDashboard()
+    } catch (error) {
+      console.log("Deu pal")
+    }
+    
+  }
+
+  function toDashboard(){
+    window.location.href = '/dashboard';
   }
 
   /*useEffect(() => {
@@ -59,26 +80,22 @@ function Login() {
 
       // Armazene o userId
 
+      try {
+        getUserEmail(inputEmail.current.value);        
+      } catch (error) {
+        console.log("Não rodou o getUser")
+      }
       
-      getUserEmail(inputEmail.current.value);
       
       console.log(inputEmail.current.value)
-      userEmail.length > 0 ? (
-        userEmail.map((user) => (
-          //  userId = (user.id) 
-          console.log(user.id)
-          //localStorage.setItem("userId", user.id)
-        ))
-      ) : (
-        console.log("Não rodou")
-      )
-      userEmail.map((user) => (
+      
+      /*userEmail.map((user) => (
         //  userId = (user.id) 
         //console.log(user.id)
         localStorage.setItem("userId", user.id)
-      ))
+      ))*/
       //console.log(userId)
-      console.log(localStorage.getItem("userId"))
+      
       //userId = userEmail.id;
       //console.log(userEmail);
       //alert(userId);
@@ -86,7 +103,7 @@ function Login() {
       //await sleep(5000)
 
 
-      window.location.href = '/dashboard'; // Redireciona para o dashboard após login bem-sucedido
+      //window.location.href = '/dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
       setErrorMessage(error.response?.data?.msg || 'Login falhou. Verifique suas credenciais.');
     }
