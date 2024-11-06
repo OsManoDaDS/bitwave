@@ -1,35 +1,45 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from 'react';
 import "./LandingPage.css";
+import api from "../../services/api";
 
-const CourseCard = ({ title, description, image, rating }) => {
+//const CourseCard = ({ title, description, image, rating }) => {
+//const CourseCard = ({ title }) => {
+const CourseCard = ({ title, description }) => {
+
     return (
-        <div className="course-card">
-            <div className="cover">
-                <div className="coverFront">
-                    <img src={image} alt={title} />
-                    <h1>{title}</h1>
-                    <div className="rating">
-                        {Array.from({ length: 5 }, (_, index) => (
-                            <span
-                                key={index}
-                                className={`star ${index < rating ? 'filled' : ''}`}
-                            >
-                                ★
-                            </span>
-                        ))}
+            <div className="course-card">
+                <div className="cover">
+                    <div className="coverFront">
+                        {/*<img src={image} alt={title} />*/}
+                        <h1>{title}</h1>
+                        
+                    </div>
+                    <div className="coverBack">
+                        <h1>{title}</h1>
+                        <p>{description}</p>
                     </div>
                 </div>
-                <div className="coverBack">
-                    <h1>{title}</h1>
-                    <p>{description}</p>
-                </div>
             </div>
-        </div>
     );
 };
 
 const LandingPage = () => {
-    const courses = [
+    const [myCourses, setMyCourses] = useState([]); 
+
+    console.log(localStorage.getItem("userId"));
+
+    async function getMyCourses() {
+        const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`)
+    
+        setMyCourses(myCoursesFromApi.data)
+        console.log(myCourses)
+    }
+    
+    useEffect(() => {
+        getMyCourses()
+    }, [])
+
+    /*const courses = [
         {
             title: "GitHub",
             description: "Aprenda a usar o GitHub para versionamento e colaboração em projetos.",
@@ -48,7 +58,7 @@ const LandingPage = () => {
             image: "https://example.com/mongodb-image.jpg",
             rating: 4 // Exemplo de avaliação
         },
-    ];
+    ];*/
 
     return (
         <div className="landing-page">
@@ -65,13 +75,13 @@ const LandingPage = () => {
             <div className="courses-section">
                 <h2>Cursos Disponíveis</h2>
                 <div className="courses">
-                    {courses.map((course, index) => (
-                        <CourseCard 
-                            key={index} 
-                            title={course.title} 
-                            description={course.description} 
-                            image={course.image} 
-                            rating={course.rating} 
+                    {myCourses.map((course, index) => (
+                        <CourseCard
+                            key={index}
+                            title={course.course.name}
+                            description={course.course.description}
+                            //image={course.image}
+                            //rating={course.rating}
                         />
                     ))}
                 </div>
