@@ -12,6 +12,7 @@ function Cadastro() {
   const inputName = useRef()
   const inputEmail = useRef()
   const inputSenha = useRef()
+  
 
   async function getUsers() {
     const usersFromApi = await api.get('/users')
