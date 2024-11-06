@@ -10,6 +10,12 @@ const Sidebar = ({ isMinimized, toggleSidebar }) => {
         toggleSidebar(); // Fecha a sidebar após a navegação
     };
 
+    const botãoLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        window.location.href = '/login';
+    };
+
     return (
         <div className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
             <div className="sidebar-header" onClick={toggleSidebar}>
@@ -31,8 +37,8 @@ const Sidebar = ({ isMinimized, toggleSidebar }) => {
                 <li onClick={() => handleNavigation('/perfil')} className="sidebar-item">
                     {isMinimized ? <span className="material-icons">person</span> : 'Perfil'}
                 </li>
-                <li onClick={() => handleNavigation('/logout')} className="sidebar-item">
-                    {isMinimized ? <span className="material-icons">exit_to_app</span> : 'Logout'}
+                <li onClick={botãoLogout} className="sidebar-item">
+                    {isMinimized ? <span className="material-icons">exit_to_app</span> : 'Sair'}
                 </li>
             </ul>
         </div>
