@@ -35,6 +35,7 @@ function Login() {
 
   useEffect(() => {
     getUsers()
+    getUserEmail()
   }, [])
 
   async function fazerlogin(event) {
@@ -68,7 +69,7 @@ function Login() {
       //console.log(userEmail);
       //alert(userId);
 
-      //window.location.href = '/Dashboard'; // Redireciona para o dashboard após login bem-sucedido
+      window.location.href = '/dashboard'; // Redireciona para o dashboard após login bem-sucedido
     } catch (error) {
       setErrorMessage(error.response?.data?.msg || 'Login falhou. Verifique suas credenciais.');
     }

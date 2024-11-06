@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api.js'
 
 const Perfil = () => {
     const [user, setUser] = useState(null);
@@ -10,9 +10,9 @@ const Perfil = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const token = localStorage.getItem('token'); // Assumindo que o token está armazenado
+                //const token = localStorage.getItem('token'); // Assumindo que o token está armazenado
                 const response = await api.get(`/users/${localStorage.getItem("userId")}`, {
-                    headers: { Authorization: `Bearer ${token}` }
+                //    headers: { Authorization: `Bearer ${token}` }
                 });
                 setUser(response.data);
                 setInitials(response.data.initials);
@@ -37,7 +37,7 @@ const Perfil = () => {
 
     const handleSaveChanges = async () => {
         try {
-            const response = await axios.put(`https://api-crud-1-sqcl.onrender.com/users/${user.id}`, formData);
+            const response = await api.put(`/users/${localStorage.getItem("userId")}`, formData);
             setUser(response.data);
             setEditing(false);
         } catch (error) {

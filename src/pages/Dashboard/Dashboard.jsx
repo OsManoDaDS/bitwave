@@ -3,36 +3,36 @@ import Sidebar from '../../components/Sidebar.jsx';
 import DashboardCard from '../../components/DashboardCard.jsx';
 import './styles.css';
 import api from '../../services/api.js';
-import userId from '../Login/login.jsx'
-
 
 const Dashboard = () => {
     const [isSidebarMinimized, setIsSidebarMinimized] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [notification, setNotification] = useState('');
+    const [courses, setCourses] = useState([]);
     const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
-    const [matriCourses, setMatriCourses] = useState([]);
+    //const [matriCourses, setMatriCourses] = useState([]);
 
-    console.log(userId);
+    console.log(localStorage.getItem("userId"));
 
     async function getCourses() {
         const coursesFromApi = await api.get("/courses")
     
-        setMyCourses(coursesFromApi.data)
-        console.log(myCourses)
+        setCourses(coursesFromApi.data)
+        console.log(coursesFromApi.data)
+        console.log(courses)
     }
     
-    async function getMatriCourses() {
-        const matriCoursesFromApi = await api.get("/matriCourse")
+    async function getMyCourses() {
+        const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`)
     
-        setMatriCourses(matriCoursesFromApi.data)
-        console.log(matriCourses)
+        setMyCourses(myCoursesFromApi.data)
+        console.log(myCourses)
     }
     
     useEffect(() => {
         getCourses()
-        getMatriCourses()
+        getMyCourses()
     }, [])
 
     
@@ -94,11 +94,11 @@ const Dashboard = () => {
 
                 <h2>Cursos em Destaque</h2>
                 <div className="cards-container">
-                    {myCourses.map((course, index) => (
+                    {courses.map((course, index) => (
                         <DashboardCard
                             key={index}
                             title={course.name}
-                            description={course.description}
+                            description="Clique para ver detalhes"
                             onClick={() => openModal(course)}
                             showRating={false} // Não mostrar avaliação nos cursos em destaque
                         />
@@ -112,8 +112,8 @@ const Dashboard = () => {
                         myCourses.map((course, index) => (
                             <DashboardCard
                                 key={index}
-                                title={course.name}
-                                description={course.description}
+                                title={course.course.name}
+                                description="Clique para ver detalhes"
                                 showRating={true} // Mostrar avaliação nos "Meus Cursos"
                             />
                         ))
@@ -135,9 +135,9 @@ const Dashboard = () => {
                         <span className="modal-close" onClick={closeModal}>&times;</span>
                         {selectedCourse && (
                             <>
-                                <h3>{selectedCourse.title}</h3>
-                                <p><strong>Duração:</strong> {selectedCourse.duration}</p>
-                                <p><strong>Professor:</strong> {selectedCourse.professor}</p>
+                                <h3>{selectedCourse.name}</h3>
+                                <br />
+                                <p><strong>Duração:</strong> {selectedCourse.duration} horas</p>
                                 <p><strong>Descrição:</strong> {selectedCourse.description}</p>
                             </>
                         )}
