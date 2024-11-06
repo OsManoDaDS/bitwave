@@ -6,6 +6,7 @@ import Home from "./pages/home/home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import LandingPage from "./pages/lading/LandingPage";
 import Configuracoes from "./pages/Configuracoes/configuracoes";
+import GitGitHub from "./pages/Git-GitHub";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/meus-cursos" element={<LandingPage />} /> {/* Adicione esta linha */}
                 <Route path="/configuracoes" element={<Configuracoes />} />
+                <Route path="/git-github" element={<GitGitHub />} />
             </Routes>
         </BrowserRouter>
     )
