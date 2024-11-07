@@ -10,10 +10,7 @@ const Perfil = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                //const token = localStorage.getItem('token'); // Assumindo que o token está armazenado
-                const response = await api.get(`/users/${localStorage.getItem("userId")}`, {
-                //    headers: { Authorization: `Bearer ${token}` }
-                });
+                const response = await api.get(`/users/${localStorage.getItem("userId")}`);
                 setUser(response.data);
                 setInitials(response.data.initials);
                 setFormData({ name: response.data.name, email: response.data.email });

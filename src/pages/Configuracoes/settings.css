@@ -1,97 +1,122 @@
 .configuracoes {
-  max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
-  background-color: #f4f8fb;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaçamento entre os componentes */
+  max-width: 800px; /* Limita a largura máxima */
+  margin: 0 auto; /* Centraliza o conteúdo */
 }
 
 .configuracoes h1 {
-  font-size: 28px;
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Espaço abaixo do título principal */
+  color: #fff;
 }
 
-.configuracoes section {
-  background-color: white;
-  margin-bottom: 20px;
+.config-section {
   padding: 20px;
+  background-color: #1d2a6e; /* Azul escuro */
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Espaçamento entre seções */
 }
 
-.configuracoes section h2 {
-  font-size: 22px;
-  color: #333;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+.config-section h2 {
+  margin-bottom: 10px; /* Espaço abaixo do título da seção */
+  color: #fff;
 }
 
-.configuracoes label {
-  display: block;
-  margin-bottom: 15px;
-  font-weight: bold;
-  color: #555;
-}
-
-.configuracoes input[type="text"],
-.configuracoes input[type="email"],
-.configuracoes select {
+.config-section input {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ddd;
+  margin-bottom: 10px; /* Espaço entre os campos de entrada */
   border-radius: 4px;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #fff; /* Cor do texto do campo de input */
+  background-color: #2e3b8b; /* Cor de fundo do input */
 }
 
-.configuracoes input[type="text"]:focus,
-.configuracoes input[type="email"]:focus,
-.configuracoes select:focus {
-  border-color: #007bff;
+.config-section button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.configuracoes input[type="file"] {
+.config-section button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
   margin-top: 10px;
 }
 
-.configuracoes img {
-  display: block;
-  max-width: 100px;
-  border-radius: 50%;
-  margin: 20px auto;
-}
-
-.configuracoes input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-.configuracoes .profile-header {
+.profile-container {
   display: flex;
   align-items: center;
+  gap: 20px; /* Espaçamento entre o avatar e o título */
+  margin-bottom: 20px; /* Espaçamento entre o perfil e a próxima seção */
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #ccc;
+  display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  align-items: center;
+  border-radius: 50%;
 }
 
-.configuracoes .profile-header img {
-  margin-right: 20px;
-}
-
-.configuracoes .edit-button {
-  background-color: #007bff;
+.initials {
+  font-size: 30px;
   color: white;
-  padding: 8px 16px;
+  font-weight: bold;
+}
+
+.profile-container h2 {
+  margin-bottom: 20px; /* Espaçamento abaixo do título "Informações Pessoais" */
+  color: #fff;
+}
+
+.profile-container div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaçamento entre as informações do perfil */
+}
+
+.profile-container input {
+  padding: 10px;
+  margin-bottom: 10px; /* Espaço entre os campos de entrada */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #2e3b8b;
+  color: #fff; /* Cor do texto do campo de input */
+}
+
+.profile-container button {
+  padding: 12px;
+  background-color: #3708bb;
+  color: white;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-.configuracoes .edit-button:hover {
-  background-color: #0056b3;
+.profile-container button:hover {
+  background-color: #5131d1;
+}
+
+.profile-container div p {
+  color: white; /* Altera a cor do texto para branco */
+}
+.config-section p {
+  color: white; /* Altera a cor do texto para branco */
 }

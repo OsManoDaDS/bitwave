@@ -34,9 +34,6 @@ const Sidebar = ({ isMinimized, toggleSidebar }) => {
                 <li onClick={() => handleNavigation('/configuracoes')} className="sidebar-item">
                     {isMinimized ? <span className="material-icons">settings</span> : 'Configurações'}
                 </li>
-                <li onClick={() => handleNavigation('/perfil')} className="sidebar-item">
-                    {isMinimized ? <span className="material-icons">person</span> : 'Perfil'}
-                </li>
                 <li onClick={botãoLogout} className="sidebar-item">
                     {isMinimized ? <span className="material-icons">exit_to_app</span> : 'Sair'}
                 </li>
