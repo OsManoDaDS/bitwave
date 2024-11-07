@@ -1,3 +1,4 @@
+/* Estilos gerais */
 html, body {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@ html {
     min-height: 100vh;
 }
 
+/* Estilos para a barra de navegação */
 .navbar {
     width: 100%;
     display: flex;
@@ -56,6 +58,7 @@ html {
     padding: 5px 0;
 }
 
+/* Estilos para os cards dos cursos */
 .courses-section {
     padding: 40px 20px;
     text-align: center;
@@ -73,6 +76,7 @@ html {
     gap: 20px;
 }
 
+/* Estilo do card do curso */
 .course-card {
     position: relative;
     width: 250px;
@@ -142,16 +146,6 @@ html {
     border-radius: 10px;
 }
 
-.footer {
-    width: 100%;
-    text-align: center;
-    background-color: #232347;
-    color: white;
-    padding: 20px 0;
-    position: relative; 
-    bottom: 0; 
-}
-
 /* Estrelas de avaliação */
 .rating {
     display: flex;
@@ -166,4 +160,44 @@ html {
 
 .star.filled {
     color: gold; /* Cor das estrelas preenchidas */
+}
+
+/* Estilo para a notificação (no canto inferior direito) */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Mudança para alinhar no canto inferior direito */
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 0;
+    animation: showNotification 3s forwards;
+}
+
+@keyframes showNotification {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Começar de baixo */
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0); /* Aparece suavemente */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(20px); /* Desaparece de forma suave */
+    }
+}
+
+/* Rodapé */
+.footer {
+    width: 100%;
+    text-align: center;
+    background-color: #232347;
+    color: white;
+    padding: 20px 0;
+    position: relative; 
+    bottom: 0; 
 }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa o useNavigate
 import Sidebar from '../../components/Sidebar.jsx';
 import DashboardCard from '../../components/DashboardCard.jsx';
 import './styles.css';
@@ -10,36 +11,31 @@ const Dashboard = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [notification, setNotification] = useState('');
     const [courses, setCourses] = useState([]);
-    const [myCourses, setMyCourses] = useState([]); // Novo estado para "Meus cursos"
-    //const [matriCourses, setMatriCourses] = useState([]);
-    //let courses = []
-    //let myCourses = []
+    const [myCourses, setMyCourses] = useState([]);
+    const navigate = useNavigate(); // Inicializa o navigate
 
-    console.log(localStorage.getItem("userId"));
+    useEffect(() => {
+        getCourses();
+        getMyCourses();
+    }, []);
 
     async function getCourses() {
-        const coursesFromApi = await api.get("/courses")
-
-        setCourses(coursesFromApi.data)
-        //courses = coursesFromApi.data
-        console.log(coursesFromApi.data)
-        console.log(courses)
-
-        //createCourseCards()
+        try {
+            const coursesFromApi = await api.get("/courses");
+            setCourses(coursesFromApi.data);
+        } catch (error) {
+            console.error("Erro ao carregar cursos:", error);
+        }
     }
 
     async function getMyCourses() {
-        const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`)
-
-        setMyCourses(myCoursesFromApi.data)
-        console.log(myCourses)
+        try {
+            const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`);
+            setMyCourses(myCoursesFromApi.data);
+        } catch (error) {
+            console.error("Erro ao carregar meus cursos:", error);
+        }
     }
-
-    useEffect(() => {
-        getCourses()
-        getMyCourses()
-    }, [])
-
 
     const toggleSidebar = () => {
         setIsSidebarMinimized(!isSidebarMinimized);
@@ -56,24 +52,25 @@ const Dashboard = () => {
     };
 
     async function handleEnrollment() {
-        // Adiciona o curso ao estado "Meus cursos" se ainda não estiver nele
         try {
-
             await api.post('/matriCourse', {
                 userId: `${localStorage.getItem("userId")}`,
-                courseId: selectedCourse.id, // Corrigi o nome para 'password'
+                courseId: selectedCourse.id,
             });
 
             if (!myCourses.some(course => course.name === selectedCourse.name)) {
                 setMyCourses([...myCourses, selectedCourse]);
             }
 
-            closeModal(); // Fecha o modal
+            closeModal();
             setNotification('Curso adicionado a "Meus Cursos". Você já pode acessá-lo!');
-            // Remove a notificação após alguns segundos
+            
             setTimeout(() => {
                 setNotification('');
             }, 3000);
+
+            // Redireciona o usuário para a página "meus-cursos"
+            navigate("/meus-cursos");
 
         } catch (error) {
             setNotification('Falha ao adicionar a "Meus Cursos"');
@@ -81,28 +78,7 @@ const Dashboard = () => {
                 setNotification('');
             }, 3000);
         }
-    };
-
-    /*const courses = [
-        {
-            title: "Desenvolvimento de Sistemas",
-            description: "Aprenda a projetar e implementar sistemas complexos, utilizando as melhores práticas de engenharia de software e tecnologias modernas.",
-            duration: "7 horas",
-            professor: "Dr. João Silva"
-        },
-        {
-            title: "Ciência de Dados",
-            description: "Domine a análise de grandes volumes de dados e transforme informações em decisões estratégicas, utilizando as mais avançadas técnicas de machine learning.",
-            duration: "6 horas",
-            professor: "Prof. Maria Costa"
-        },
-        {
-            title: "Git / GitHub",
-            description: "Entenda o fluxo completo de controle de versão e como colaborar eficientemente em projetos com Git e GitHub.",
-            duration: "4 horas",
-            professor: "Prof. Pedro Portales"
-        }
-    ];*/
+    }
 
     return (
         <div className="dashboard">
@@ -116,12 +92,10 @@ const Dashboard = () => {
                         <DashboardCard
                             key={index}
                             title={course.name}
-                            //title="{course.name}"
                             description="Clique para ver detalhes"
                             onClick={() => openModal(course)}
-                            showRating={false} // Não mostrar avaliação nos cursos em destaque
+                            showRating={false}
                         />
-
                     ))}
                 </div>
 
@@ -133,7 +107,7 @@ const Dashboard = () => {
                                 key={index}
                                 title={course.course.name}
                                 description="Clique para ver detalhes"
-                                showRating={true} // Mostrar avaliação nos "Meus Cursos"
+                                showRating={true}
                             />
                         ))
                     ) : (
