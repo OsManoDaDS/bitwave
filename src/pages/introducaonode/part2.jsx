@@ -1,29 +1,42 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './styles.css';
 
-function GitGitHub() {
+function IntroducaoNode2() {
     const [progress, setProgress] = useState(0);
     const videoRef = useRef(null);
+    const playerRef = useRef(null); // Guarda a referência do player
 
     useEffect(() => {
-        if (!window.YT) {
-            const script = document.createElement('script');
-            script.src = 'https://www.youtube.com/iframe_api';
-            document.body.appendChild(script);
-        }
-        console.log(typeof(progress))
-    }, []);
-
-    useEffect(() => {
-        window.onYouTubeIframeAPIReady = () => {
-            new window.YT.Player(videoRef.current, {
-                videoId: 'DlHJjTNNTzc',
-                events: {
-                    onStateChange: onPlayerStateChange,
-                },
-            });
+        const loadYouTubeAPI = () => {
+            if (!window.YT) {
+                const script = document.createElement('script');
+                script.src = 'https://www.youtube.com/iframe_api';
+                document.body.appendChild(script);
+            } else {
+                initPlayer(); // Inicializa o player se a API já estiver carregada
+            }
         };
+
+        const onYouTubeIframeAPIReady = () => {
+            initPlayer();
+        };
+
+        window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+        loadYouTubeAPI();
     }, []);
+
+    const initPlayer = () => {
+        if (playerRef.current) {
+            playerRef.current.destroy(); // Destroi o player anterior, se houver
+        }
+
+        playerRef.current = new window.YT.Player(videoRef.current, {
+            videoId: '_gHr2Pe5LCY', // ID do novo vídeo
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+    };
 
     const onPlayerStateChange = (event) => {
         if (event.data === window.YT.PlayerState.PLAYING) {
@@ -34,7 +47,7 @@ function GitGitHub() {
                 setProgress(newProgress);
             }, 100);
 
-            event.target.addEventListener('onStateChange', function onStateChange(event) {
+            event.target.addEventListener('onStateChange', (event) => {
                 if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
                     clearInterval(interval);
                 }
@@ -52,12 +65,12 @@ function GitGitHub() {
             <nav className="git-navbar">
                 <h1>BitWave</h1>
             </nav>
-            
+
             <main className="git-content">
                 <section className="git-video-description">
-                    <h2>Aprenda Git e GitHub de forma simples e prática!</h2>
+                    <h2>Introdução ao Node + React</h2>
                     <p>
-                        Git e GitHub são ferramentas essenciais para qualquer desenvolvedor moderno. Neste vídeo, você aprenderá a usar o <strong>Git</strong> para versionar seu código e o <strong>GitHub</strong> para colaborar e armazenar seus projetos.
+                        Aprenda a criar uma API com <strong>Node.js</strong>, criar um front-end utilizando <strong>React</strong>, e a conectar o front-end com a API
                     </p>
                 </section>
 
@@ -70,11 +83,13 @@ function GitGitHub() {
                 </section>
 
                 <div className="git-next-step-container">
-                    <button className="git-next-step-btn" onClick={goToNextPage}>Finalizar</button>
+                    <button className="git-next-step-btn" onClick={goToNextPage}>
+                        Você concluiu o curso
+                    </button>
                 </div>
             </main>
         </>
     );
 }
 
-export default GitGitHub;
+export default IntroducaoNode2;

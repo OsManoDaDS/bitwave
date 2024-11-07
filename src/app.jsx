@@ -8,7 +8,7 @@ import LandingPage from "./pages/lading/LandingPage";
 import Configuracoes from "./pages/Configuracoes/configuracoes";
 import GitGitHub from "./pages/Git-GitHub";
 import IntroducaoNode from "./pages/introducaonode";
-
+import IntroducaoNode2 from "./pages/introducaonode/part2";
 
 function App() {
 
@@ -25,6 +25,7 @@ function App() {
                 <Route path="/configuracoes" element={<Configuracoes />} />
                 <Route path="/git-github" element={<GitGitHub />} />
                 <Route path="/introducaonode" element={<IntroducaoNode />} />
+                <Route path="/introducaonode2" element={<IntroducaoNode2 />} />
             </Routes>
         </BrowserRouter>
     )

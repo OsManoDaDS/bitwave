@@ -55,34 +55,41 @@ function introducaoNode() {
         }
     };
 
-    return (
-        <>
-            <nav className="git-navbar">
-                <h1>BitWave</h1>
-            </nav>
-            
-            <main className="git-content">
-                <section className="git-video-description">
-                    <h2>Aprenda Git e GitHub de forma simples e prática!</h2>
-                    <p>
-                        Git e GitHub são ferramentas essenciais para qualquer desenvolvedor moderno. Neste vídeo, você aprenderá a usar o <strong>Git</strong> para versionar seu código e o <strong>GitHub</strong> para colaborar e armazenar seus projetos.
-                    </p>
-                </section>
+        const goToNextPage = () => {
+            // Defina a URL da próxima página
+            window.location.href = '/introducaonode2'; // ou a URL desejada
+        };
 
-                <section className="git-video-player">
-                    <div id="player" ref={videoRef}></div>
-                </section>
+        return (
+            <>
+                <nav className="git-navbar">
+                    <h1>BitWave</h1>
+                </nav>
 
-                <section className="git-progress-bar-container">
-                    <div className="git-progress-bar" style={{ width: `${progress}%` }}></div>
-                </section>
+                <main className="git-content">
+                    <section className="git-video-description">
+                        <h2>Aprenda Git e GitHub de forma simples e prática!</h2>
+                        <p>
+                            Git e GitHub são ferramentas essenciais para qualquer desenvolvedor moderno. Neste vídeo, você aprenderá a usar o <strong>Git</strong> para versionar seu código e o <strong>GitHub</strong> para colaborar e armazenar seus projetos.
+                        </p>
+                    </section>
 
-                <div className="git-next-step-container">
-                    <button className="git-next-step-btn">Próxima etapa</button>
-                </div>
-            </main>
-        </>
-    );
-}
+                    <section className="git-video-player">
+                        <div id="player" ref={videoRef}></div>
+                    </section>
 
-export default introducaoNode;
+                    <section className="git-progress-bar-container">
+                        <div className="git-progress-bar" style={{ width: `${progress}%` }}></div>
+                    </section>
+
+                    <div className="git-next-step-container">
+                        <button className="git-next-step-btn" onClick={goToNextPage}>
+                            Próxima etapa
+                        </button>
+                    </div>
+                </main>
+            </>
+        );
+    }
+
+    export default introducaoNode;
