@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef, useEffect } from 'react';
 import './styles.css';
 
@@ -45,28 +43,28 @@ function GitGitHub() {
 
     return (
         <>
-            <nav className="navbar">
+            <nav className="git-navbar">
                 <h1>BitWave</h1>
             </nav>
             
-            <main className="content">
-                <section className="video-description">
+            <main className="git-content">
+                <section className="git-video-description">
                     <h2>Aprenda Git e GitHub de forma simples e prática!</h2>
                     <p>
                         Git e GitHub são ferramentas essenciais para qualquer desenvolvedor moderno. Neste vídeo, você aprenderá a usar o <strong>Git</strong> para versionar seu código e o <strong>GitHub</strong> para colaborar e armazenar seus projetos.
                     </p>
                 </section>
 
-                <section className="video-player">
+                <section className="git-video-player">
                     <div id="player" ref={videoRef}></div>
                 </section>
 
-                <section className="progress-bar-container">
-                    <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                <section className="git-progress-bar-container">
+                    <div className="git-progress-bar" style={{ width: `${progress}%` }}></div>
                 </section>
 
-                <div className="next-step-container">
-                    <button className="next-step-btn">Próxima etapa</button>
+                <div className="git-next-step-container">
+                    <button className="git-next-step-btn">Próxima etapa</button>
                 </div>
             </main>
         </>

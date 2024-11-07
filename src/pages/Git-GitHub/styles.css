@@ -13,20 +13,20 @@ body {
 }
 
 /* Navbar */
-.navbar {
+.git-navbar {
   background-color: #333;
   color: white;
   padding: 20px;
   text-align: center;
 }
 
-.navbar h1 {
+.git-navbar h1 {
   font-size: 2rem;
   font-weight: 600;
 }
 
 /* Conteúdo principal */
-.content {
+.git-content {
   max-width: 900px;
   margin: 40px auto;
   background-color: white;
@@ -36,24 +36,24 @@ body {
 }
 
 /* Descrição do vídeo */
-.video-description h2 {
+.git-video-description h2 {
   font-size: 1.8rem;
-  color: #000; /* Cor preta para o título */
+  color: #000;
   margin-bottom: 20px;
 }
 
-.video-description p {
+.git-video-description p {
   font-size: 1rem;
-  color: #000; /* Cor preta para o texto */
+  color: #000;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
 /* Player de vídeo */
-.video-player {
+.git-video-player {
   text-align: center;
   margin-bottom: 20px;
-  background-color: #000; /* Fundo preto no player de vídeo */
+  background-color: #000;
 }
 
 #player {
@@ -64,7 +64,7 @@ body {
 }
 
 /* Barra de Progresso */
-.progress-bar-container {
+.git-progress-bar-container {
   width: 100%;
   height: 6px;
   background-color: #ecf0f1;
@@ -72,18 +72,18 @@ body {
   border-radius: 3px;
 }
 
-.progress-bar {
+.git-progress-bar {
   height: 100%;
   background-color: #3498db;
   border-radius: 3px;
 }
 
 /* Botão de próxima etapa */
-.next-step-container {
+.git-next-step-container {
   text-align: center;
 }
 
-.next-step-btn {
+.git-next-step-btn {
   background-color: #3498db;
   color: white;
   padding: 12px 25px;
@@ -94,10 +94,10 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.next-step-btn:hover {
+.git-next-step-btn:hover {
   background-color: #2980b9;
 }
 
-.next-step-btn:focus {
+.git-next-step-btn:focus {
   outline: none;
 }
