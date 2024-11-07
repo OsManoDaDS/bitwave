@@ -55,19 +55,11 @@ function Home() {
                     <h2>Nossos Cursos em Destaque</h2>
                     <div className="courses">
                         <CourseCard
-                            title="Desenvolvimento de Sistemas: Do Planejamento à Implementação"
-                            description="Crie sistemas robustos e escaláveis do zero.
-                            Este curso aborda todas as etapas do desenvolvimento de sistemas, desde o levantamento de requisitos e
-                             design arquitetural até a implementação e manutenção. Com foco em metodologias ágeis, padrões de design e 
-                             boas práticas de codificação, você desenvolverá a habilidade de construir soluções eficientes e adaptáveis."
-                            image="img1.svg"
-                        />
-                        <CourseCard
-                            title="Ciência de Dados: Transformando Dados em Insights"
-                            description="Entenda, analise e visualize dados para gerar decisões estratégicas.
-                            Descubra o poder da ciência de dados! Aprenda a manipular grandes volumes de dados, aplicar técnicas 
-                            de machine learning e utilizar ferramentas como Python e R para extrair insights valiosos. Você sairá 
-                            preparado para atuar em áreas como análise de dados, modelagem preditiva e visualização de informações complexas."
+                            title="Introdução ao Node + React"
+                            description="Aprenda os fundamentos do desenvolvimento full-stack com Node e React. 
+                             Este curso aborda desde o setup inicial até a criação de APIs e interfaces interativas. 
+                            Com práticas modernas e foco em desenvolvimento ágil, você adquirirá habilidades essenciais para construir 
+                              aplicações web dinâmicas e escaláveis."
                             image="img2.svg"
                         />
                         <CourseCard
