@@ -70,8 +70,11 @@ const LandingPage = () => {
         console.log(`Assistindo o curso: ${courseName}`); // Para depuração
         if (courseName === "Git e GitHub") {
             navigate("/Git-Github"); // Redireciona para a rota do curso Git-GitHub
+        } else if (courseName === "Introdução ao Node + React") {
+            navigate("/introducaonode"); // Redireciona para a rota do curso Introdução ao Node
         }
     };
+    
 
     return (
         <div className="landing-page">

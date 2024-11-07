@@ -1,0 +1,104 @@
+/* Reset básico para garantir que todos os elementos fiquem uniformes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Navbar */
+  .git-navbar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .git-navbar h1 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  /* Conteúdo principal */
+  .git-content {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Descrição do vídeo */
+  .git-video-description h2 {
+    font-size: 1.8rem;
+    color: #000;
+    margin-bottom: 20px;
+  }
+  
+  .git-video-description p {
+    font-size: 1rem;
+    color: #000;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  /* Player de vídeo */
+  .git-video-player {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #000;
+  }
+  
+  #player {
+    width: 100%;
+    height: 450px;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Barra de Progresso */
+  .git-progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: #ecf0f1;
+    margin: 20px 0;
+    border-radius: 3px;
+  }
+  
+  .git-progress-bar {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 3px;
+  }
+  
+  /* Botão de próxima etapa */
+  .git-next-step-container {
+    text-align: center;
+  }
+  
+  .git-next-step-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .git-next-step-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .git-next-step-btn:focus {
+    outline: none;
+  }
+  
