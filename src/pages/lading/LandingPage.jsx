@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
+import { useNavigate } from 'react-router-dom';
 import "./LandingPage.css";
 import api from "../../services/api";
 
@@ -39,7 +39,7 @@ const CourseCard = ({ title, description, rating = 4, onRate, onWatch }) => {
                     <h1>{title}</h1>
                     <p>{description}</p>
                     <div className="star-rating">{renderStars()}</div>
-                    <button onClick={onWatch}>Assistir</button> {/* Botão de assistir */}
+                    <button onClick={() => onWatch(title)} className="watch-button">Assistir</button>
                 </div>
             </div>
         </div>
@@ -47,9 +47,9 @@ const CourseCard = ({ title, description, rating = 4, onRate, onWatch }) => {
 };
 
 const LandingPage = () => {
+    const navigate = useNavigate();
     const [myCourses, setMyCourses] = useState([]);
     const [notification, setNotification] = useState("");
-    const navigate = useNavigate(); // Usando o hook useNavigate
 
     async function getMyCourses() {
         const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`);
@@ -65,16 +65,13 @@ const LandingPage = () => {
         setTimeout(() => setNotification(""), 3000); // Oculta a notificação após 3 segundos
     };
 
-    // Função para redirecionar para a página do curso
-    const handleWatchCourse = (courseName) => {
-        console.log(`Assistindo o curso: ${courseName}`); // Para depuração
-        if (courseName === "Git e GitHub") {
-            navigate("/Git-Github"); // Redireciona para a rota do curso Git-GitHub
-        } else if (courseName === "Introdução ao Node + React") {
-            navigate("/introducaonode"); // Redireciona para a rota do curso Introdução ao Node
+    const handleWatchCourse = (title) => {
+        if (title === "Git e GitHub") {
+            navigate("/git-github");
+        } else if (title === "Introdução ao Node + React") {
+            navigate("/introducaonode");
         }
     };
-    
 
     return (
         <div className="landing-page">
@@ -98,7 +95,7 @@ const LandingPage = () => {
                             description={course.course.description}
                             rating={course.course.rating || 4}
                             onRate={handleRateCourse}
-                            onWatch={() => handleWatchCourse(course.course.name)} // Passa o nome do curso para o handleWatchCourse
+                            onWatch={handleWatchCourse}
                         />
                     ))}
                 </div>
